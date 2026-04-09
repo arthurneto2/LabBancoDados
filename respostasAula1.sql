@@ -45,3 +45,20 @@ SELECT
 FROM funcionario f
 LEFT JOIN departamento ON f.numerodept = departamento.dnumero
 LEFT JOIN funcionario s ON departamento.gerentecpf = s.cpf;
+
+SELECT 
+	projeto.projnome AS PROJETO_NOME,
+	MAX(horas) AS MAX_HORAS,
+	MIN(horas) AS MIN_HORAS,
+	AVG(horas) AS AVG_HORAS
+FROM trabalhaeM
+INNER JOIN projeto ON trabalhaem.projetonumero = projeto.projnumero
+GROUP BY projeto.projnome;
+
+SELECT 
+	departamento.dnome,
+	COUNT (funcionario.cpf) AS QTD_FUNCIONARIOS,
+FROM departamento
+INNER JOIN funcionario ON funcionario.numerodept = departamento.dnumero
+GROUP BY departamento.dnome
+HAVING AVG(funcionario.salario) > 33000
